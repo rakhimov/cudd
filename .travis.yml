@@ -3,35 +3,26 @@ dist: trusty
 
 language: cpp
 
-os:
-    - linux
-    - osx
-
-compiler:
-    - gcc
-    - clang
+compiler: gcc
 
 env:
     global:
-        # Intel Parallel Studio
-        - secure: "oHT0WgQgu2sETkBm8xKVoyLbZPPjX+rg7FHLwJCrjoEFWX++11Hm6qNdEA210PhwABvW5wqFFb4TUnc2vham/CVlSXkSlN1umtyrXQGv9y/emv+vUv3+BvYyM3nTPPbutMyQB1NVfp+M14SMjb/JLAUQ3l8+ceCm3Dy8EAb4WqF8ddn9Qf9RsUYjLoWpDJov/KUqAMXdaro4LNXxUSHEw/JBZiDwqsEx09ncclABdY+y/H1Zqjjm81lfspeu58bHI36GHw3ZFCOjLwig9jS6yRj5aQDiwapIuXDW8i8u8D1W02VI7GpPa2wXKwTgFvhSKccXLuOjrsHWyNzGdrkmAY5IxKMS0Dl6koZAqIJWZS18miqGtsmcwck3miHTsiWsmsfBtOxzDWiV9GITh7QJnt249Q40x0m0eWMW7QlCTDAQFa8hYOMpTVcfvb1BE0ZLuHIB/rvoRgwXqMM69wlFBJ78SxkSvc3rawuFBnzVZ9/+fQDUM7UDyXC+6hkwru3RfIuC5kAjxN0V2d2rwngbMO7Q/SnKdtpJv/WS5efPbaYSR0gUlQRAfgC+I4kV6UC+yAunL9Zy8KoU4FRVlJyyC5TX6Q3EnogsAwzJBEcHTvvRiaZ/jyWKvU1VldqR1kqJ5flUsMe1dL8xdAT9+rEr1Y66QVrVAbXwB7cLieEHRj4="
+        - secure: "NKfoW+Z/E7I7uQ1iu0UTpxgz6h1/w+Z0m564ZLGQvmlv7vOUbZc10Xju5ev48bFrg/jzyc+VmAhsjKrd4E2c2Ol/CG5+oRql/7Nzc0t6coW1BcEryQ0PLvTyGdscUB8XvE8AcFpNuADf8NyE4Yr1UA1kmaK/YH1e/om6Huh8e2sTjfp5WVq+jyxYgMOa4wFUXA1/7snKdoTmvGv3yWYhPVu1l2XXQOK67nW2jkKHTxTBOeruYNaHsbFwrvV3blRT8kA2a5/U8eQTabETe11dfAaKJNwYvtmUE67+IICe5xZlGJle66dMtmAKpthjAz8DlWbezd2zhuNfAgaYcb7snK0ES0r0oig9L4BkmHBLwNaGTU31sii31L4BGEJu1mq58O0vT81uDV6ULgTlyrtW5b7b9jC0yKUGcasv7DShI0zv0YEbE5ijbIn+wvsVxbwreIb5Y8hLwud0x6H1w+GYNYwMIvON5/GryTOhDh6s1XiF1+o485fB9TWmlGlkfcyyhEzpozfRaZ72Z9YY7ICFLlU/mzJVflSt5WJZ5UG7klnnxt/KUDg7QZJBztp0EHZzNHUM4vJpq3fpC/yQRjTJLeUhpQCIfE916dJgNE9U23rZelWad8qIYOHAPG+Hl08bko37XcyHaZFID7pFvtXZ4aDEIkCNUYncOYeAKmY2lbQ="
 
-matrix:
-    exclude:
-        - os: osx
-          compiler: gcc
-    include:
-        - os: linux
-          compiler: icc
-          env: INTEL_COMPILER=true
-
-install:
-    - if [[ -n "${INTEL_COMPILER}" ]]; then git clone https://github.com/nemequ/icc-travis.git; ./icc-travis/install-icc.sh; fi
-
-before_script:
-    - if [[ -n "${INTEL_COMPILER}" ]]; then export CC=icc; export CXX=icpc; source ~/.bashrc; fi
+addons:
+    coverity_scan:
+        project:
+            name: "rakhimov/cudd"
+        notification_email: "ol.rakhimov@gmail.com"
+        build_command_prepend: "./configure --enable-obj"
+        build_command: "make -j 2"
+        branch_pattern: "coverity-scan"
 
 script:
-    - ./configure --enable-obj
-    - make -j 2
-    - make check
+    - echo "Done"
+
+after_success:
+    - cat build/cov-int/scm_log.txt
+
+after_failure:
+    - cat build-log.txt
