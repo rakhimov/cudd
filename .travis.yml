@@ -1,0 +1,24 @@
+sudo: required
+dist: trusty
+
+language: cpp
+
+os:
+    - linux
+    - osx
+
+compiler:
+    - gcc
+    - clang
+
+matrix:
+    exclude:
+        - os: osx
+          compiler: gcc
+
+script:
+    - ./configure --enable-obj
+    - make -j 2
+
+after_script:
+    - make check
