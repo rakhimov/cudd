@@ -30,8 +30,10 @@ install:
 
 before_script:
     - if [[ -n "${INTEL_COMPILER}" ]]; then export CC=icc; export CXX=icpc; source ~/.bashrc; fi
+    - mkdir build
+    - cd build
 
 script:
-    - ./configure --enable-obj
+    - cmake ..
     - make -j 2
-    - make check
+    # - make check
