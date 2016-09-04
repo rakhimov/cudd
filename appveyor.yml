@@ -1,0 +1,12 @@
+platform:
+    - x64
+
+install:
+    - set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+
+build_script:
+    - bash configure --enable-obj
+    - make -j 2
+
+test_script:
+    - make check
