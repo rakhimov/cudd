@@ -8,6 +8,9 @@
 .. image:: https://scan.coverity.com/projects/rakhimov-cudd/badge.svg
     :target: https://scan.coverity.com/projects/rakhimov-cudd
 
+.. image:: https://coveralls.io/repos/github/rakhimov/cudd/badge.svg?branch=master
+    :target: https://coveralls.io/github/rakhimov/cudd?branch=master
+
 This is the main branch of CUDD with ``Autotools`` configurations.
 Please see ``README.autotools`` for building information.
 
