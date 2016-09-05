@@ -1,16 +1,11 @@
-.. image:: https://travis-ci.org/rakhimov/cudd.svg?branch=master
+.. image:: https://travis-ci.org/rakhimov/cudd.svg?branch=cmake
     :target: https://travis-ci.org/rakhimov/cudd
 
-.. image:: https://ci.appveyor.com/api/projects/status/pl0d9cqaq7c4sl6h/branch/master?svg=true
-    :target: https://ci.appveyor.com/project/rakhimov/cudd/branch/master
+.. image:: https://ci.appveyor.com/api/projects/status/pl0d9cqaq7c4sl6h/branch/cmake?svg=true
+    :target: https://ci.appveyor.com/project/rakhimov/cudd/branch/cmake
     :alt: 'Build status'
 
-.. image:: https://scan.coverity.com/projects/rakhimov-cudd/badge.svg
-    :target: https://scan.coverity.com/projects/rakhimov-cudd
+This branch hosts the development of CMake configurations
+to build CUDD.
 
-This is the main branch of CUDD with ``Autotools`` configurations.
-Please see ``README.autotools`` for building information.
-
-For CMake build configurations,
-checkout ``cmake`` branch,
-which hosts the current development to support CMake.
+Take a look at the root ``CMakeLists.txt`` to find the current build options.
