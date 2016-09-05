@@ -35,5 +35,6 @@ before_script:
 
 script:
     - cmake ..
+    - cat config.h
     - make -j 2
     # - make check
